@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import SideForm from './SideForm'
+import SideForm from './formLayout/SideForm'
 import SidePicture from './SidePicture'
 
 

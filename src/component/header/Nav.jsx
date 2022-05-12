@@ -5,20 +5,20 @@ export default function Nav() {
     <div id='nav-option-head'>
         <div className='container_nav_logo'>
             <div>
-                <div className='logo_nav option_segmento_logo' />
-                <span>امکانات سگمنتو</span>
+                <span className='logo_nav option_segmento_logo' />
+                <a href='#'>امکانات سگمنتو</a>
             </div>
             <div>
-                <div className='logo_nav course_video_logo'/>
-                <span>ویدئو آموزشی</span>
+                <span className='logo_nav course_video_logo'/>
+                <a href='#'>ویدئو آموزشی</a>
             </div>
             <div>
-                <div className='logo_nav diamond_price_logo' />
-                <span>قیمت اشتراک ماهانه</span>
+                <span className='logo_nav diamond_price_logo' />
+                <a href='#'>قیمت اشتراک ماهانه</a>
             </div>
             <div>
-                <div className='logo_nav cookie_communicate_logo' />
-                <span>همکاری با تیم سگمنتو</span>
+                <span className='logo_nav cookie_communicate_logo' />
+                <a href='#'>همکاری با تیم سگمنتو</a>
             </div>
         </div>
         <div>
