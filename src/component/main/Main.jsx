@@ -1,13 +1,18 @@
 import React, { Fragment } from 'react'
-import SideForm from './formLayout/SideForm'
+import Login from './formLayout/Login'
+import Register from './formLayout/Register'
 import SidePicture from './SidePicture'
 
 
 export default function Main() {
   return (
+    <Fragment>
+
     <div id='main'>
-        <SideForm/>
+        {/* <Register/> */}
+        <Login/>
         <SidePicture/>
     </div>
+    </Fragment>
   )
 }
