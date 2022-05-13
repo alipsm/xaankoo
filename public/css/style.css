@@ -6,10 +6,12 @@
   margin: 0px;
   font-family: IranYekan;
   direction: rtl;
+  cursor: default;
 }
-a{
+a {
   text-decoration: none;
   color: #063468;
+  cursor: pointer;
 }
 body {
   background-color: rgb(255, 255, 255);
@@ -73,15 +75,22 @@ body {
 
 /* btn style*/
 .btn-style {
-  width: 110px;
-  height: 40px;
+  width: 170px;
+  /* height: 40px;*/
+  height: 50px;
   background-color: rgba(10, 101, 205, 1);
   /* font-size: 14px; */
   font-size: 16px;
   color: white;
   border: none;
   border-radius: 9px;
+  cursor: pointer;
   /* padding:40px 110px ; */
+  display: flex;
+    /* display: inline-block; */
+    /* text-align: center; */
+    align-items: center;
+    justify-content: center;
 }
 
 /* main form section */
@@ -102,6 +111,23 @@ body {
 #side-picture-form p {
   padding: 20px 0px;
 }
+
+/* picture form login */
+.picture_form_login{
+  width: 537px;
+  height: 531px;
+
+}
+.picture_form_login img:first-child{
+height: 20%;
+float: right;
+}
+.picture_form_login img:last-child{
+  width: 100%;
+  height: 80%;
+
+}
+
 .picture_form {
   /* width: 337px;
   height: 331px; */
@@ -131,9 +157,6 @@ input[type="text"]:focus {
 }
 input[type="text"] {
   font: 15px/24px "Lato", Arial, sans-serif;
-  /* color: #333; */
-  /* color: #001F43; */
-
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -142,14 +165,11 @@ input[type="text"] {
   border-radius: 3px;
   font-size: 25px;
   padding: 15px 15px;
+  cursor:text;
 }
 .col-3 {
-  /* float: left; */
-  /* width: 560px; */
   box-sizing: border-box;
   width: 100%;
-  /* height: 45px; */
-  /* margin: 40px 3%; */
   margin-bottom: 40px;
   position: relative;
   background-color: white;
@@ -218,7 +238,7 @@ input[type="text"] {
 }
 
 /* btn acount form */
-.footer_form{
+.footer_form {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -234,7 +254,7 @@ input[type="text"] {
 .btn_register {
   box-sizing: content-box;
   color: white;
-  background-color: #0A65CD;
+  background-color: #0a65cd;
 }
 .btn_login_google {
   text-align: right;
@@ -248,40 +268,36 @@ input[type="text"] {
   margin-right: 20px;
 }
 
-.footer_form a, #verify-form a{
-color: #001F43;
-text-decoration: underline;
-text-underline-position: under;
+.footer_form a,
+#verify-form a {
+  color: #001f43;
+  text-decoration: underline;
+  text-underline-position: under;
 }
 
-
-
 /* VERIFY EMAIL FORM */
-#verify-form{
+#verify-form {
   position: relative;
   text-align: center;
   width: 100vw;
   padding: 0px 20vw;
   height: 100%;
 }
-#verify-form p{
+#verify-form p {
   font-size: 18px;
   padding: 10vh 0px;
 }
-#verify-form .verify_email_section{
-box-sizing: content-box;
-
+#verify-form .verify_email_section {
+  box-sizing: content-box;
 }
-#verify-form .verify_email_section span{
+#verify-form .verify_email_section span {
   font-size: 14px;
   /* padding: 50px 0px; */
-  
 }
-#verify-form .verify_email_section .container_number{
-padding: 25px 0px;/* padding: 18px 0px; */
-
+.container_number {
+  padding: 25px 0px; /* padding: 18px 0px; */
 }
-#verify-form .verify_email_section .container_number input[type="number"]{
+.container_number input[type="number"] {
   text-align: center;
   height: 70px;
   width: 70px;
@@ -292,6 +308,7 @@ padding: 25px 0px;/* padding: 18px 0px; */
   font-size: 30px;
   padding: 5px;
   border-radius: 3px;
+  cursor: text;
 }
 
 /* remove increment decrement input number */
@@ -301,29 +318,28 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-#verify-form .verify_email_section .container_number input[type="number"]:focus{
+.container_number input[type="number"]:focus {
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px;
 }
 
-
-#verify-form .verify_email_section  div:last-of-type{
+#verify-form .verify_email_section div:last-of-type {
   position: relative;
-width: 100%;
-text-align: center;
+  width: 100%;
+  text-align: center;
 }
-#verify-form .verify_email_section  button{
+#verify-form .verify_email_section button {
   width: 170px;
   height: 50px;
   margin: auto;
-clear: left;
+  clear: left;
 }
-#verify-form .verify_email_section  a{
+#verify-form .verify_email_section a {
   position: absolute;
   top: 0px;
   left: 50px;
   /* float: left; */
-/* background-color: #8398b1; */
+  /* background-color: #8398b1; */
 }
 #verify-form .footer_icon_suport {
   position: absolute;
@@ -332,13 +348,84 @@ clear: left;
   /* text-align: center; */
   bottom: 30px;
   /* margin: auto; */
-
 }
-#verify-form .footer_icon_suport img{
+#verify-form .footer_icon_suport img {
   /* position: absolute; */
   /* bottom: 10px; */
   width: 27px;
   height: 27px;
   margin: 5px;
+}
+
+/* FORGOT PASSWORD FORM */
+
+#forgot-password {
+  width: 50vw;
+  height: 100%;
+}
+#forgot-password p {
+  width: 60%;
+  font-size: 18px;
+  padding: 5% 0px;
+}
+#forgot-password .verify_email_section span {
+  margin-right: 20px;
+}
+#forgot-password .container_number {
+  padding: 0px 0px !important;
+  /* margin-right: 20px; */
+}
+#forgot-password .container_number input[type="number"]:first-of-type {
+  /* padding: 0px 0px !important; */
+  margin-right: 0px;
+}
+#forgot-password .col-3 {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  /* padding: 0px 0px !important; */
+  display: inline-block;
+  margin-right: 0px;
+}
+#forgot-password button {
+  /* height: 10px; */
+  /* width: 40%; */
+  /* padding: 0px 0px !important; */
+  margin-right: 50px;
+}
+
+#forgot-password .container_number {
+  display: inline-block;
+  margin-bottom: 68px;
+}
+#forgot-password .container_password_input .col-3:last-child {
+margin-right: 50px;
+}
+#forgot-password .footer_form {
+  justify-content:stretch;
+  margin-right: 0px;
+}
+#forgot-password .footer_form button {
+  margin-right: 0px;
+}
+#forgot-password .footer_form a {
+  margin-right: 400px;
+}
+
+/* disabled div class */
+.disabled_div button:disabled{
+  /* filter: grayscale(1); */
+  color: rgba(96, 94, 92, 0.5);
+  background-color: #F2F5F7;
+  cursor: default;
+}
+.disabled_div span{
+  /* filter: grayscale(1); */
+  color: rgba(211, 213, 226, 1);
 
 }
+.disabled_div input[type="number"]:disabled{
+  cursor: default !important;
+  background: rgba(242, 245, 247, 1);
+}
+

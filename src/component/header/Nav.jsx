@@ -1,4 +1,6 @@
 import React from 'react'
+import { Route, Routes } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export default function Nav() {
   return (
@@ -22,13 +24,11 @@ export default function Nav() {
         </div>
       </div>
       <div>
-        {true ? (
-          <button className='btn-style'>ثبت نام</button>
-        ) : (
-          <button className='btn-style'>ورود</button>
-        )
-
-        }
+        <Routes>
+          <Route path={"login"} element={<Link to={"register"} className='btn-style'>ثبت نام</Link>} />
+          <Route path={"forgotpassword"} element={<Link to={"forgotpassword"} className='btn-style'>ثبت نام</Link>} />
+          <Route path={"*"} element={<Link to={"login"} className='btn-style'>ورود</Link>} />
+        </Routes>
       </div>
     </div>
   )

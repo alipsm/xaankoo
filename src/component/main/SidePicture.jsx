@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
-export default function SidePicture() {
+export default function SidePicture({form_name}) {
   return (
     <div id='side-picture-form'>
       {/* <div></div> */}
       <div>
-        {true ? (
+        {form_name=="login" ? (
+          <div className='picture_form_login'>
 
+            <img src="./images/picture_form/login/sun_login.svg"  alt="2nabsh" />
+            <img src="./images/picture_form/login/login.svg" alt="2nabsh" />
+          </div>
+          ) : (
           <img src="./images/picture_form/verifying/verifying.svg" className='picture_form' alt="2nabsh" />
-        ) : (
 
-          <img src="../../../public/images/partner_companies/2nabsh.svg" alt="2nabsh" />
         )}
       </div>
       <p>برند هایی که به ما اعتماد کرده اند:</p>
