@@ -1,0 +1,58 @@
+
+REGISTER USER COD SERVER
+
+    var formdata = new FormData();
+    formdata.append("name","gsdfgsdf")
+    formdata.append("email","bafdg@gmail.com")
+    formdata.append("password","12385678")
+    formdata.append("password_confirmation","12385678")
+      axios.post(
+        "http://segmento.online/api/v1/auth/register",
+         formdata
+        ,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(({ data, status }) => {
+            if (status === 200) {
+
+              console.log("send");
+            }
+        }).catch(ex => {
+            console.log(ex);
+        });
+        //END
+
+
+LOGIN USER COD SERVER
+
+    var formdata = new FormData();
+    // formdata.append("name","gsdfgsdf")
+    formdata.append("email","bafdg@gmail.com")
+    formdata.append("password","12385678")
+    formdata.append("remember","1")
+      axios.post(
+        "http://segmento.online/api/v1/auth/login",
+         formdata
+        ,
+        {
+          headers: [
+					{
+            "type": "noauth",
+            "Accept":"application/json"
+					}
+				]
+        }).then(({ data, status }) => {
+            if (status === 200) {
+              debugger
+              console.log("send");
+            }
+        }).catch(ex => {
+            console.log(ex);
+        });
+        //END
+
+
+
+

@@ -383,15 +383,12 @@ input::-webkit-inner-spin-button {
   display: flex;
   align-items: center;
   width: 350px;
-  /* padding: 0px 0px !important; */
   display: inline-block;
   margin-right: 0px;
 }
 #forgot-password button {
-  /* height: 10px; */
-  /* width: 40%; */
-  /* padding: 0px 0px !important; */
   margin-right: 50px;
+  display: inline-block;
 }
 
 #forgot-password .container_number {

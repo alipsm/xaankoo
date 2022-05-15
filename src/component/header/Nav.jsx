@@ -25,9 +25,9 @@ export default function Nav() {
       </div>
       <div>
         <Routes>
-          <Route path={"login"} element={<Link to={"register"} className='btn-style'>ثبت نام</Link>} />
-          <Route path={"forgotpassword"} element={<Link to={"forgotpassword"} className='btn-style'>ثبت نام</Link>} />
-          <Route path={"*"} element={<Link to={"login"} className='btn-style'>ورود</Link>} />
+          <Route path={"login"} element={<Link to={"/register"} className='btn-style'>ثبت نام</Link>} />
+          <Route path={"forgotpassword"} element={<Link to={"/register"} className='btn-style'>ثبت نام</Link>} />
+          <Route path={"*"} element={<Link to={"/login"} className='btn-style'>ورود</Link>} />
         </Routes>
       </div>
     </div>
