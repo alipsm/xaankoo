@@ -3,15 +3,27 @@ import { registerUser,loginUser, verifyEmail, checkVerifyEmail } from "../../ser
 import { showInputErrorToast, showPromisToast } from "../../Utils/toastifyPromise";
 
 
+
+export const resetState = () => {
+    return async (dispatch) => {
+        await dispatch({ type: "RESET_STATE"})
+    }
+}
 export const registerUserAction = (nameUser, email, password, password_confirmation) => {
     return async (dispatch, getState) => {
-        let formdata = new FormData();
-        formdata.append("name", nameUser)
-        formdata.append("email", email)
-        formdata.append("password", password)
-        formdata.append("password_confirmation", password_confirmation)
-        const { data,status } = await registerUser(formdata);
-        debugger
+        if (nameUser,email,password,password_confirmation) {
+            let formdata = new FormData();
+            formdata.append("name", nameUser)
+            formdata.append("email", email)
+            formdata.append("password", password)
+            formdata.append("password_confirmation", password_confirmation)
+            const register_user=async()=>{
+                const { data,status } = await registerUser(formdata);
+            }
+            showPromisToast(register_user)
+        }else{
+            showInputErrorToast();
+        }
         await dispatch({ type: "REGISTER_USER", payload: { ...getState() } })
     }
 }
@@ -22,19 +34,12 @@ export const loginUserAction = (email, password) => {
         try {
             if (email,password) {
                 
-                let messageToast="";
-    
                 let formdata = new FormData();
                 formdata.append("email", email)
                 formdata.append("password", password)
                 // const { data,status } = await loginUser(formdata);
                 const login_user=async()=>{
                     const { data,status } = await loginUser(formdata);
-                    if (status==200) {
-                        // messageToast="درخواست ورود انجام شد"
-                    } else {
-                        
-                    }
                 }
                 showPromisToast(login_user)
             }
@@ -50,22 +55,51 @@ export const loginUserAction = (email, password) => {
 
 export const sendCodEmailAction = (email) => {
     return async (dispatch, getState) => {
-        let formdata = new FormData();
-        formdata.append("email", email)
-        const { data,status } = await verifyEmail(formdata);
-        debugger
-        await dispatch({ type: "SEND_COD_EMAIL", payload: { ...getState() } })
+        let next_section=false;
+
+        if (email) {
+            
+            let formdata = new FormData();
+            formdata.append("email", email)
+            const send_code_email=async()=>{
+                const { data,status } = await verifyEmail(formdata);
+                // debugger
+                if (status==200) {
+                    next_section=true;
+                }
+                await dispatch({ type: "SEND_COD_EMAIL", payload:  next_section==true?1:{...getState()}  })
+            }
+            showPromisToast(send_code_email)
+        }
+        else{
+            showInputErrorToast();
+        }
     }
 }
 
 export const checkVerifyEmailAction = (email,codVerifyEmail_1,codVerifyEmail_2,codVerifyEmail_3,codVerifyEmail_4) => {
     return async (dispatch, getState) => {
-        const code=codVerifyEmail_1+codVerifyEmail_2+codVerifyEmail_3+codVerifyEmail_4;
-        let formdata = new FormData();
-        formdata.append("conde", code)
-        formdata.append("email", email)
-        const { data,status } = await checkVerifyEmail(formdata);
-        debugger
-        await dispatch({ type: "VERIFY_EMAIL", payload: { ...getState() } })
+        let next_section=false;
+
+        if (email,codVerifyEmail_1,codVerifyEmail_2,codVerifyEmail_3,codVerifyEmail_4) {
+            
+            const code=codVerifyEmail_1+codVerifyEmail_2+codVerifyEmail_3+codVerifyEmail_4;
+            debugger
+            let formdata = new FormData();
+            formdata.append("conde", code)
+            formdata.append("email", email)
+            const check_verify_email=async()=>{
+                const { data,status } = await checkVerifyEmail(formdata);
+                if (status==200) {
+                    next_section=true;
+                 }
+                 await dispatch({ type: "VERIFY_EMAIL", payload: next_section==true?2:{...getState()}})
+            }
+            showPromisToast(check_verify_email)
+        }
+        else{
+            showInputErrorToast();
+        }
+
     }
 }

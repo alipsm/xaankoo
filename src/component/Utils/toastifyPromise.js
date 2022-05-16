@@ -1,29 +1,48 @@
 import { toast } from "react-toastify"
 
-export const showPromisToast=(fun)=>{
+export const showPromisToast = (fun) => {
     // debugger
-    var messageToastSuccess="";
-    var messageToastFiled="";
+    var messageToastSuccess = "";
+    var messageToastFiled = "";
     switch (fun.name) {
         case "login_user":
-            messageToastSuccess= "ورود موفقیت آمیز"
-            messageToastFiled="خطا در ورود کاربر"
+            messageToastSuccess = "ورود موفقیت آمیز"
+            messageToastFiled = "خطا در ورود کاربر"
+            break;
+
+        case "register_user":
+            messageToastSuccess = "ثبت نام موفقیت آمیز"
+            messageToastFiled = "خطا در ثبت نام کاربر"
+            break;
+
+        case "send_code_email":
+            messageToastSuccess = "کد به حساب شما ارسال شد"
+            messageToastFiled = "مشکل در ارسال کد به حساب شما"
+            break;
+
+
+        case "check_verify_email":
+            messageToastSuccess = "اعتبار سنجی ایمیل انجام شد"
+            messageToastFiled = "خطا در اعتبار سنجی ایمیل"
+            break;
+
+
         default:
             break;
     }
     toast.promise(
         fun
-       ,
-       {
-        hideProgressBar:true,
-         pending: 'درحال ارسال درخواست شما به سرور',
-         success:messageToastSuccess,
-         error:messageToastFiled
-       }
-   )
+        ,
+        {
+            hideProgressBar: true,
+            pending: 'درحال ارسال درخواست شما به سرور',
+            success: messageToastSuccess,
+            error: messageToastFiled
+        }
+    )
 }
 
-export const showInputErrorToast=()=>{
+export const showInputErrorToast = () => {
     toast.info('لطفا فیلد هارا با دقت پرکنید', {
         position: "top-right",
         autoClose: 3000,
@@ -32,5 +51,5 @@ export const showInputErrorToast=()=>{
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+    });
 }

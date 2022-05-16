@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Route, Routes } from 'react-router'
 import { context } from '../../contextApi/context'
 import { useDispatch } from 'react-redux'
-import {loginUserAction, registerUserAction} from '../../Redux/Action'
+import {loginUserAction, registerUserAction, resetState} from '../../Redux/Action'
 
 export default function FooterOptionForm({ form_type }) {
     const {
@@ -28,7 +28,7 @@ export default function FooterOptionForm({ form_type }) {
             {/* <a href="#">حساب کاربری دارم!</a> */}
             {form_type == "login" ? (
 
-                <Link to={"/forgotpassword"}>گذرواژه خود را فراموش کرده اید؟</Link>
+                <Link to={"/forgotpassword"} onClick={()=>dispatch(resetState())}>گذرواژه خود را فراموش کرده اید؟</Link>
             ) : (
                 <Link to={"/login"}>حساب کاربری دارم!</Link>
 

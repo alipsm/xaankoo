@@ -261,6 +261,7 @@ input[type="text"] {
   font-size: 14px;
   border: none;
   border-radius: 9px;
+  cursor: pointer;
 }
 .btn_register {
   box-sizing: content-box;
@@ -308,7 +309,7 @@ input[type="text"] {
 .container_number {
   padding: 25px 0px; /* padding: 18px 0px; */
 }
-.container_number input[type="number"] {
+.container_number input[type="tel"] {
   text-align: center;
   height: 70px;
   width: 70px;
@@ -329,9 +330,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.container_number input[type="number"]:focus {
+.container_number input[type="tel"]:focus {
   outline: none;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px;
+  box-shadow: rgba(0, 0, 0, 0.719) 0px 1px 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 #verify-form .verify_email_section div:last-of-type {
@@ -386,7 +388,7 @@ input::-webkit-inner-spin-button {
   padding: 0px 0px !important;
   /* margin-right: 20px; */
 }
-#forgot-password .container_number input[type="number"]:first-of-type {
+#forgot-password .container_number input[type="tel"]:first-of-type {
   /* padding: 0px 0px !important; */
   margin-right: 0px;
 }
@@ -421,19 +423,38 @@ margin-right: 50px;
 }
 
 /* disabled div class */
-.disabled_div button:disabled{
+button:disabled{
   /* filter: grayscale(1); */
-  color: rgba(96, 94, 92, 0.5);
-  background-color: #F2F5F7;
-  cursor: default;
+  color: rgba(96, 94, 92, 0.5) !important;
+  background-color: #F2F5F7 !important;
+  cursor: default !important;
 }
-.disabled_div span{
+#forgot-password .disabled_span_style{
   /* filter: grayscale(1); */
   color: rgba(211, 213, 226, 1);
 
 }
-.disabled_div input[type="number"]:disabled{
+#forgot-password .disabled_span_style{
+  /* filter: grayscale(1); */
+  color: rgba(211, 213, 226, 1);
+
+}
+#forgot-password .disabled_label_style{
+  /* filter: grayscale(1); */
+  color: #A9AAA9;
+
+}
+input:disabled{
   cursor: default !important;
   background: rgba(242, 245, 247, 1);
+}
+
+#forgot-password .effect-22 ~ label {
+  top: -30px;
+  right: 5;
+  font-size: 14px;
+}
+#forgot-password .complete_btn_section {
+background-color: #0AC7E2;
 }
 
