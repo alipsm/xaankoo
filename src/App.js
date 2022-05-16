@@ -6,6 +6,7 @@ import Nav from "./component/header/Nav";
 import Main from "./component/main/Main";
 
 import axios from 'axios'
+import { ToastContainer } from "react-toastify";
 
 function App() {
 
@@ -115,9 +116,10 @@ function App() {
 
   return (
     <Fragment>
-      {/* <Nav/> */}
-      {/* <Main/> */}
-      <button className="btn-style" onClick={() => handle_register()}>register</button>
+      <Nav/>
+      <Main/>
+      <ToastContainer/>
+      {/* <button className="btn-style" onClick={() => handle_register()}>register</button> */}
     </Fragment>
   );
 }

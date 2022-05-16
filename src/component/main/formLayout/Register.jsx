@@ -1,39 +1,41 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import FooterOptionForm from './FooterOptionForm'
 
-
+import { context } from "../../contextApi/context"
 
 export default function Register() {
+  const {
+    setName,
+    setEmail,
+    setPassword,
+    setPassword_confirmation,
+  } = useContext(context)
   return (
     <div id='register-form'>
+
       <div className="col-3 input-effect">
-        <input className="effect-22" name='name' type="text" />
+        <input className="effect-22" name='name' placeholder=' ' type="text" onChange={e => setName(e.target.value)} />
         <label>نام و نام خانوادگی</label>
         <span className="focus-bg"></span>
       </div>
       <div className="col-3 input-effect">
-        <input className="effect-22" name='email' type="text" />
+        <input className="effect-22" name='email' placeholder=' ' type="text" onChange={e => setEmail(e.target.value)} />
         <label>ایمیل</label>
         <span className="focus-bg"></span>
       </div>
-      {/* <input type="text" name="name" id="name" placeholder='نام و نام خانوادگی'/> */}
-      {/* <input type="text" name="email" id="email" placeholder='ایمیل' /> */}
       <div className='container_password_input'>
         <div className="col-3 input-effect">
-          <input className="effect-22" type="text" />
+          <input className="effect-22" type="text" placeholder=' ' onChange={e => setPassword(e.target.value)} />
           <label>گذرواژه</label>
           <span className="focus-bg"></span>
         </div>
         <div className="col-3 input-effect">
-          <input className="effect-22" type="text" />
+          <input className="effect-22" type="text" placeholder=' ' onChange={e => setPassword_confirmation(e.target.value)} />
           <label>تکرار گذرواژه</label>
           <span className="focus-bg"></span>
         </div>
-
-        {/* <input type="text" id="1_password" placeholder='گذرواژه' /> */}
-        {/* <input type="text" id="2_password" placeholder='تکرار گذرواژه' /> */}
       </div>
-      <FooterOptionForm form_type="register"/>
+      <FooterOptionForm form_type="register" />
     </div>
   )
 }

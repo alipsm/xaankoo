@@ -8,6 +8,17 @@
   direction: rtl;
   cursor: default;
 }
+input:not(:placeholder-shown){
+  -webkit-box-shadow: 0 0 0 30px rgb(255, 255, 255) inset !important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    /* background-color: #001f43 !important; */
+    -webkit-box-shadow: 0 0 0 30px rgb(255, 255, 255) inset !important;
+    /* -webkit-box-shadow: 0 0 0 30px rgb(0, 0, 0) inset !important; */
+}
 a {
   text-decoration: none;
   color: #063468;

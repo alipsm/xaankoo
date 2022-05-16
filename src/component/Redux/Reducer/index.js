@@ -1,5 +1,5 @@
 export const userReducer = (state = {}, action) => {
-    switch (key) {
+    switch (action.type) {
         case "REGISTER_USER":
             return { ...action.payload }
         case "LOGIN_USER":
