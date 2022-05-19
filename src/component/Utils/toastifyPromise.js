@@ -4,6 +4,7 @@ export const showPromisToast = (fun) => {
     // debugger
     var messageToastSuccess = "";
     var messageToastFiled = "";
+
     switch (fun.name) {
         case "login_user":
             messageToastSuccess = "ورود موفقیت آمیز"
@@ -17,13 +18,19 @@ export const showPromisToast = (fun) => {
 
         case "send_code_email":
             messageToastSuccess = "کد به حساب شما ارسال شد"
-            messageToastFiled = "مشکل در ارسال کد به حساب شما"
+            messageToastFiled = "خطا در ارسال کد به حساب شما"
             break;
 
 
         case "check_verify_email":
             messageToastSuccess = "اعتبار سنجی ایمیل انجام شد"
             messageToastFiled = "خطا در اعتبار سنجی ایمیل"
+            break;
+
+
+        case "change_password":
+            messageToastSuccess = "پسورد با موفقیت تغییر کرد"
+            messageToastFiled = "API برایه تغییر پسورد یافت نشد"
             break;
 
 

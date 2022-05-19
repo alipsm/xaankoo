@@ -5,6 +5,7 @@ export const registerUser = user => {
     const headerRegisterUser = {
         'Content-Type': 'multipart/form-data'
     }
+    debugger
     return http.post(`${config.xaankooApi}/api/v1/auth/register`,user, headerRegisterUser);
 }
 

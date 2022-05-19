@@ -8,6 +8,7 @@ import SidePicture from './SidePicture'
 
 
 export default function Main() {
+  
   return (
     <Fragment>
 
@@ -25,25 +26,18 @@ export default function Main() {
               <SidePicture form_name={"resister"} />
             </Fragment>
           } />
-          <Route path='verifyemail' element={
+          <Route path='register/verifyemail' element={
             <Fragment>
               <VerifyEmail />
-              <SidePicture form_name={"verifyEmail"} />
             </Fragment>
           } />
-
           <Route path='forgotpassword' element={
-
             <Fragment>
               <ForgotPassword />
               <SidePicture form_name={"verifyEmail"} />
             </Fragment>
           } />
         </Routes>
-        {/* <Register/> */}
-        {/* <Login/> */}
-        {/* <VerifyEmail/> */}
-        {/* <ForgotPassword/> */}
       </div>
     </Fragment>
   )

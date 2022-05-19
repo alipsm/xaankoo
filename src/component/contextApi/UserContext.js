@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { handleNextInput } from '../Utils/focusNextInput';
 import {context} from './context'
 export default function UserContext({children}) {
     
@@ -11,7 +12,24 @@ export default function UserContext({children}) {
     const [codVerifyEmail_3,setCodVerifyEmail_3]=useState("");
     const [codVerifyEmail_4,setCodVerifyEmail_4]=useState("");
     const [remember,setRemember]=useState("");
+    const [register,setRegister]=useState(false);
 
+
+    //HANDLE SELECT NEXT INPUT IN FORM FORGOTPASSWORD AND VERIFYEMAIL
+    useEffect(() => {
+        handleNextInput(0)
+    }, [codVerifyEmail_1])
+    useEffect(() => {
+        handleNextInput(4)
+    }, [codVerifyEmail_2])
+    useEffect(() => {
+        handleNextInput(3)
+    }, [codVerifyEmail_3])
+    useEffect(() => {
+        handleNextInput(2)
+    }, [codVerifyEmail_4])
+    
+    
 
   return (
       <context.Provider value={
@@ -33,7 +51,9 @@ export default function UserContext({children}) {
               codVerifyEmail_4,
               setCodVerifyEmail_4,
               remember,
-              setRemember
+              setRemember,
+              register,
+              setRegister
           }
       }>
           {children}

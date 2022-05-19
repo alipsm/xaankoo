@@ -3,12 +3,12 @@ import { context } from '../../contextApi/context'
 import FooterOptionForm from './FooterOptionForm'
 
 export default function Login() {
+    
     const {
-        // setName,
         setEmail,
         setPassword,
-        // setPassword_confirmation,
     } = useContext(context)
+
     return (
         <div id='register-form'>
             <div className="col-3 input-effect">

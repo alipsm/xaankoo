@@ -1,15 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import FooterOptionForm from './FooterOptionForm'
-
 import { context } from "../../contextApi/context"
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 export default function Register() {
+
+  const navigate = useNavigate();
+
   const {
     setName,
     setEmail,
     setPassword,
     setPassword_confirmation,
   } = useContext(context)
+
+  const { checkRegisterComplete } = useSelector(state => state)
+
+  useEffect(() => {
+    if (checkRegisterComplete == true) {
+      navigate("verifyemail", { replace: false })
+    }
+  }, [checkRegisterComplete])
+
+
   return (
     <div id='register-form'>
 

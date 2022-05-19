@@ -18,5 +18,7 @@ export const context=createContext({
     codVerifyEmail_4:"",
     setCodVerifyEmail_4:()=>{},
     remember:"",
-    setRemember:()=>{}
+    setRemember:()=>{},
+    register:false,
+    setRegister:()=>{}
 })

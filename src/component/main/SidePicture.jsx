@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 export default function SidePicture({form_name}) {
+
   return (
     <div id='side-picture-form'>
-      {/* <div></div> */}
       <div>
         {form_name=="login" ? (
           <div className='picture_form_login'>

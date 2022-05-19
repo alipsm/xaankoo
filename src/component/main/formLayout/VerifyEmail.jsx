@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useDispatch } from 'react-redux';
+import { context } from '../../contextApi/context';
+import { checkVerifyEmailAction, sendCodEmailAction } from '../../Redux/Action';
+import { handleNextInput } from '../../Utils/focusNextInput';
 
 export default function VerifyEmail() {
+
+    const {
+        email,
+        setEmail,
+        codVerifyEmail_1,
+        setCodVerifyEmail_1,
+        codVerifyEmail_2,
+        setCodVerifyEmail_2,
+        codVerifyEmail_3,
+        setCodVerifyEmail_3,
+        codVerifyEmail_4,
+        setCodVerifyEmail_4,
+    } = useContext(context)
+
+    const dispatch = useDispatch();
+
     return (
         <div id='verify-form'>
             <p>
@@ -15,14 +35,14 @@ export default function VerifyEmail() {
             <div className='verify_email_section'>
                 <span>کد فعال سازی</span>
                 <div className='container_number'>
-                    <input type="number" name="" id="" maxLength={1} max={9} />
-                    <input type="number" name="" id="" />
-                    <input type="number" name="" id="" />
-                    <input type="number" name="" id="" />
+                    <input className='input_selector_4' type="tel" name="" id="" maxLength={1} onChange={e => setCodVerifyEmail_1(e.target.value)}/>
+                    <input className='input_selector_3' type="tel" name="" id="" maxLength={1} onChange={e => setCodVerifyEmail_2(e.target.value)}/>
+                    <input className='input_selector_2' type="tel" name="" id="" maxLength={1} onChange={e => setCodVerifyEmail_3(e.target.value)}/>
+                    <input  type="tel" name="" id="" maxLength={1} onChange={e => setCodVerifyEmail_4(e.target.value)}/>
                 </div>
                 <div>
-                <button className='btn-style'>تایید ایمیل</button>
-                <a href="#" >دریافت مجدد ایمیل</a>
+                <button className='btn-style' onClick={()=>dispatch(checkVerifyEmailAction(email, codVerifyEmail_1, codVerifyEmail_2, codVerifyEmail_3, codVerifyEmail_4))}>تایید ایمیل</button>
+                <a href="#" onClick={()=>dispatch(sendCodEmailAction(email))}>دریافت مجدد ایمیل</a>
                 </div>
             </div>
             <div className='footer_icon_suport'>

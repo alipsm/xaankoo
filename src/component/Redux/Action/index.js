@@ -1,105 +1,137 @@
-import { toast } from "react-toastify";
-import { registerUser,loginUser, verifyEmail, checkVerifyEmail } from "../../service/userService"
+import { registerUser, loginUser, verifyEmail, checkVerifyEmail } from "../../service/userService"
 import { showInputErrorToast, showPromisToast } from "../../Utils/toastifyPromise";
 
-
-
+// RESET STATE REDUX
 export const resetState = () => {
     return async (dispatch) => {
-        await dispatch({ type: "RESET_STATE"})
+        await dispatch({ type: "RESET_STATE" })
     }
 }
+
+// REGISTER USER
 export const registerUserAction = (nameUser, email, password, password_confirmation) => {
     return async (dispatch, getState) => {
-        if (nameUser,email,password,password_confirmation) {
+
+        if (nameUser&& email&& password&& password_confirmation) {
+
+            let state={...getState()}
+
             let formdata = new FormData();
             formdata.append("name", nameUser)
             formdata.append("email", email)
             formdata.append("password", password)
             formdata.append("password_confirmation", password_confirmation)
-            const register_user=async()=>{
-                const { data,status } = await registerUser(formdata);
+
+            let register_user =async () => {
+                const { data, status } = await registerUser(formdata);
+
+                if (status==200) {
+                    state.email=email;
+                    state.checkRegisterComplete=true;
+                    let send_code_email = async () => {
+                        const { data, status } = await verifyEmail(formdata);
+                    }
+
+                    await dispatch({ type: "SEND_CODE_EMAIL", payload: state})
+                    showPromisToast(send_code_email)
+                }
             }
             showPromisToast(register_user)
-        }else{
+        } else {
             showInputErrorToast();
         }
-        await dispatch({ type: "REGISTER_USER", payload: { ...getState() } })
     }
 }
 
-const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+//LOGIN USER
 export const loginUserAction = (email, password) => {
     return async (dispatch, getState) => {
         try {
-            if (email,password) {
-                
+            if (email&& password) {
+
                 let formdata = new FormData();
                 formdata.append("email", email)
                 formdata.append("password", password)
-                // const { data,status } = await loginUser(formdata);
-                const login_user=async()=>{
-                    const { data,status } = await loginUser(formdata);
+
+                let login_user = async () => {
+                    const { data, status } = await loginUser(formdata);
                 }
                 showPromisToast(login_user)
             }
-            else{
+            else {
                 showInputErrorToast();
             }
         } catch (error) {
-            console.log(error)
+            showInputErrorToast();
         }
         await dispatch({ type: "LOGIN_USER", payload: { ...getState() } })
     }
 }
 
+//SEND EMAIL COD
 export const sendCodEmailAction = (email) => {
     return async (dispatch, getState) => {
-        let next_section=false;
 
         if (email) {
-            
+            let state={...getState()}
             let formdata = new FormData();
             formdata.append("email", email)
-            const send_code_email=async()=>{
-                const { data,status } = await verifyEmail(formdata);
-                // debugger
-                if (status==200) {
-                    next_section=true;
+            let send_code_email = async () => {
+                const { data, status } = await verifyEmail(formdata);
+
+                if (status == 200) {
+                    state.forgotPasswordStep=1;
+                    await dispatch({ type: "SEND_CODE_EMAIL", payload:state})
                 }
-                await dispatch({ type: "SEND_COD_EMAIL", payload:  next_section==true?1:{...getState()}  })
             }
             showPromisToast(send_code_email)
         }
-        else{
+        else {
             showInputErrorToast();
         }
     }
 }
 
-export const checkVerifyEmailAction = (email,codVerifyEmail_1,codVerifyEmail_2,codVerifyEmail_3,codVerifyEmail_4) => {
+//CHECK EMAIL COD 
+export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2, codVerifyEmail_3, codVerifyEmail_4) => {
     return async (dispatch, getState) => {
-        let next_section=false;
+        let state={...getState()}
 
-        if (email,codVerifyEmail_1,codVerifyEmail_2,codVerifyEmail_3,codVerifyEmail_4) {
-            
-            const code=codVerifyEmail_1+codVerifyEmail_2+codVerifyEmail_3+codVerifyEmail_4;
-            debugger
+        debugger
+        if (email&& codVerifyEmail_1&& codVerifyEmail_2&& codVerifyEmail_3&& codVerifyEmail_4) {
+
+            const code = codVerifyEmail_1 + codVerifyEmail_2 + codVerifyEmail_3 + codVerifyEmail_4;
             let formdata = new FormData();
             formdata.append("conde", code)
-            formdata.append("email", email)
-            const check_verify_email=async()=>{
-                const { data,status } = await checkVerifyEmail(formdata);
-                if (status==200) {
-                    next_section=true;
-                 }
-                 await dispatch({ type: "VERIFY_EMAIL", payload: next_section==true?2:{...getState()}})
+            formdata.append("email", email?email:state.email)
+            let check_verify_email = async () => {
+                const { data, status } = await checkVerifyEmail(formdata);
+                if (status == 200) {
+                    state.forgotPasswordStep=2;
+                }
+                await dispatch({ type: "VERIFY_EMAIL", payload: state})
             }
             showPromisToast(check_verify_email)
         }
-        else{
+        else {
             showInputErrorToast();
         }
+    }
+}
 
+//CHANGE USER PASSWORD 
+export const changePasswordAction = () => {
+    return async (dispatch, getState) => {
+
+        let state={...getState()}
+
+        let change_password = async () => {
+            return Promise.reject();
+        }
+
+        showPromisToast(change_password)
+
+        alert("باعرض پوزش دسترسی به وبسرویس تغییر پسورد نداشتم و قرار شد تا این مرحله پیش برم");
+        await dispatch({ type: "CHANGE_PASSWORD",payload:state })
     }
 }
