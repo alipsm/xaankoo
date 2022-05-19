@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Route, Routes } from 'react-router'
+import Page404 from '../Utils/Error404/page404'
 import ForgotPassword from './formLayout/ForgotPassword'
 import Login from './formLayout/Login'
 import Register from './formLayout/Register'
@@ -36,6 +37,11 @@ export default function Main() {
               <ForgotPassword />
               <SidePicture form_name={"verifyEmail"} />
             </Fragment>
+          } />
+          <Route path='*' element={
+            // <Fragment>
+              <Page404/>
+            // </Fragment>
           } />
         </Routes>
       </div>

@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { useDispatch } from 'react-redux';
 import { context } from '../../contextApi/context';
 import { checkVerifyEmailAction, sendCodEmailAction } from '../../Redux/Action';
-import { handleNextInput } from '../../Utils/focusNextInput';
 
 export default function VerifyEmail() {
 

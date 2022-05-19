@@ -418,6 +418,25 @@ background-color: #0AC7E2;
 }
 
 
+#page-404{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  text-align: center;
+}
+#page-404 img{
+  width: 400px;
+  height: 400px;
+  opacity: 0.9;
+  border-radius: 50px;
+}
+#page-404 p{
+padding: 20px;
+}
+
 
 /* BASIC RESPONSE FOR LAPTOP */
 @media screen and (max-width:1510px) {
