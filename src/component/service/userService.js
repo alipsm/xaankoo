@@ -9,7 +9,6 @@ export const registerUser = user => {
 }
 
 export const loginUser = user => {
-    debugger
     const headerLoginUser = {
         "type": "noauth",
         "Accept": "application/json"

@@ -46,7 +46,7 @@ export const registerUserAction = (nameUser, email, password, password_confirmat
 //LOGIN USER
 export const loginUserAction = (email, password) => {
     return async (dispatch, getState) => {
-        debugger
+        // debugger
         try {
             if (email&& password) {
 
@@ -103,10 +103,10 @@ export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2
 
             const code = codVerifyEmail_1 + codVerifyEmail_2 + codVerifyEmail_3 + codVerifyEmail_4;
             let formdata = new FormData();
-            formdata.append("code", "1111")
-            // formdata.append("code", code)
-            // formdata.append("email", email?email:state.email)
-            formdata.append("email", "stooormix@gmail.com")
+            // formdata.append("code", "1111")
+            formdata.append("code", code)
+            formdata.append("email", email?email:state.email)
+            // formdata.append("email", "stooormix@gmail.com")
             // debugger
             let check_verify_email = async () => {
                 const { data, status } = await checkVerifyEmail(formdata);
