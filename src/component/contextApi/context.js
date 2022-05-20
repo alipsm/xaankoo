@@ -20,5 +20,8 @@ export const context=createContext({
     remember:"",
     setRemember:()=>{},
     register:false,
-    setRegister:()=>{}
+    setRegister:()=>{},
+    validator:"",
+    check_validator:()=>{},
+    reset_state_contextApi:()=>{}
 })

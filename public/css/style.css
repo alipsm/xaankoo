@@ -33,7 +33,7 @@ a {
   width: 170px;
   height: 50px;
   background-color: rgba(10, 101, 205, 1);
-  font-size: 16px;
+  font-size: 1rem;
   color: white;
   border: none;
   border-radius: 9px;
@@ -58,7 +58,7 @@ input[type="text"] {
   letter-spacing: 1px;
   z-index: 2;
   border-radius: 3px;
-  font-size: 25px;
+  font-size: 1.5rem;
   padding: 15px 15px;
   cursor:text;
 }
@@ -212,7 +212,7 @@ animation: animation_rotate_sun 2s ease-in-out infinite alternate;
   padding: 7px 15px;
   position: relative;
   background: transparent;
-  font-size: 16px;
+  font-size: 1rem;
   color: #001f43;
 }
 .effect-22 ~ .focus-bg {
@@ -246,7 +246,7 @@ animation: animation_rotate_sun 2s ease-in-out infinite alternate;
 .has-content.effect-22 ~ label {
   top: -30px;
   right: 5;
-  font-size: 14px;
+  font-size: 0.9em;
   transition: 0.3s;
 }
 
@@ -270,7 +270,8 @@ animation: animation_rotate_sun 2s ease-in-out infinite alternate;
 .btn_acount_form {
   width: 140px;
   height: 40px;
-  font-size: 14px;
+  /* font-size: 14px; */
+  font-size: 0.9rem;
   border: none;
   border-radius: 9px;
   cursor: pointer;
@@ -373,6 +374,22 @@ animation: animation_rotate_sun 2s ease-in-out infinite alternate;
 }
 #forgot-password .verify_email_section span {
   margin-right: 20px;
+}
+#forgot-password .disabled_label_style{
+  color: #A9AAA9;
+}
+#forgot-password .disabled_span_style{
+  color: rgba(211, 213, 226, 1);
+}
+.input-validator-container{
+  position: relative;
+}
+.span_validator{
+  color: #ff3434e6;
+  position: absolute;
+  bottom: -20px;
+  right: 0px;
+  font-size: 0.8rem;
 }
 #forgot-password .container_number input[type="tel"]:first-of-type {
   margin-right: 0px;

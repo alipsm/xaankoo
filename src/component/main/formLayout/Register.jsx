@@ -9,10 +9,14 @@ export default function Register() {
   const navigate = useNavigate();
 
   const {
+    name,
     setName,
+    email,
     setEmail,
     setPassword,
     setPassword_confirmation,
+    validator,
+    check_validator
   } = useContext(context)
 
   const { checkRegisterComplete } = useSelector(state => state)
@@ -27,15 +31,22 @@ export default function Register() {
   return (
     <div id='register-form'>
 
-      <div className="col-3 input-effect">
+     
+      <div className='input-validator-container col-3'>
+         <div className=" input-effect">
         <input className="effect-22" name='name' placeholder=' ' type="text" onChange={e => setName(e.target.value)} />
         <label>نام و نام خانوادگی</label>
         <span className="focus-bg"></span>
+          {validator.current.message('name', name, 'required')}
       </div>
-      <div className="col-3 input-effect">
-        <input className="effect-22" name='email' placeholder=' ' type="text" onChange={e => setEmail(e.target.value)} />
-        <label>ایمیل</label>
-        <span className="focus-bg"></span>
+      </div>
+      <div className='input-validator-container col-3'>
+        <div className=" input-effect">
+          <input className="effect-22" name='email' placeholder=' ' type="text" onChange={e => setEmail(e.target.value)} />
+          <label>ایمیل</label>
+          <span className="focus-bg"></span>
+          {validator.current.message('email', email, 'required|email')}
+        </div>
       </div>
       <div className='container_password_input'>
         <div className="col-3 input-effect">

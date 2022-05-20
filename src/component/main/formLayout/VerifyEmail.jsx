@@ -7,7 +7,6 @@ export default function VerifyEmail() {
 
     const {
         email,
-        setEmail,
         codVerifyEmail_1,
         setCodVerifyEmail_1,
         codVerifyEmail_2,
@@ -45,8 +44,8 @@ export default function VerifyEmail() {
                 </div>
             </div>
             <div className='footer_icon_suport'>
-                <img src='./images/picture_form/email_verify/call.svg' />
-                <img src='./images/picture_form/email_verify/support.svg' />
+                <img src='/images/picture_form/email_verify/call.svg' />
+                <img src='/images/picture_form/email_verify/support.svg' />
             </div>
         </div>
     )

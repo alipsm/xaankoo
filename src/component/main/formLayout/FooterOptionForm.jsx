@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { context } from '../../contextApi/context'
 import { useDispatch, } from 'react-redux'
-import { loginUserAction, registerUserAction, resetState } from '../../Redux/Action'
+import { loginUserAction, registerUserAction, resetStateRedux } from '../../Redux/Action'
 
 export default function FooterOptionForm({ form_type }) {
     const {
@@ -10,6 +10,7 @@ export default function FooterOptionForm({ form_type }) {
         email,
         password,
         password_confirmation,
+        check_validator
     } = useContext(context)
     const dispatch = useDispatch();
 
@@ -20,13 +21,13 @@ export default function FooterOptionForm({ form_type }) {
 
                     <button className='btn_acount_form btn_register' onClick={() => dispatch(loginUserAction(email, password))}>ورود</button>
                 ) : (
-                    <button className='btn_acount_form btn_register' onClick={() => dispatch(registerUserAction(name, email, password, password_confirmation))}>عضویت</button>
+                    <button className='btn_acount_form btn_register' onClick={() => check_validator(registerUserAction(name, email, password, password_confirmation),["email","name"])}>عضویت</button>
                 )}
                 <button className='btn_acount_form btn_login_google'>حساب گوگل</button>
             </div>
             {form_type == "login" ? (
 
-                <Link to={"/forgotpassword"} onClick={() => dispatch(resetState())}>گذرواژه خود را فراموش کرده اید؟</Link>
+                <Link to={"/forgotpassword"} onClick={() => dispatch(resetStateRedux())}>گذرواژه خود را فراموش کرده اید؟</Link>
             ) : (
                 <Link to={"/login"}>حساب کاربری دارم!</Link>
 

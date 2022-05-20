@@ -2,7 +2,7 @@ import { registerUser, loginUser, verifyEmail, checkVerifyEmail } from "../../se
 import { showInputErrorToast, showPromisToast } from "../../Utils/toastifyPromise";
 
 // RESET STATE REDUX
-export const resetState = () => {
+export const resetStateRedux = () => {
     return async (dispatch) => {
         await dispatch({ type: "RESET_STATE" })
     }
@@ -97,7 +97,7 @@ export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2
     return async (dispatch, getState) => {
         let state={...getState()}
 
-        debugger
+        // debugger
         if (email&& codVerifyEmail_1&& codVerifyEmail_2&& codVerifyEmail_3&& codVerifyEmail_4) {
 
             const code = codVerifyEmail_1 + codVerifyEmail_2 + codVerifyEmail_3 + codVerifyEmail_4;

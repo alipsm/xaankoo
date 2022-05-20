@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import SimpleReactValidator from 'simple-react-validator';
 import { handleNextInput } from '../Utils/focusNextInput';
 import {context} from './context'
 export default function UserContext({children}) {
@@ -11,8 +13,12 @@ export default function UserContext({children}) {
     const [codVerifyEmail_2,setCodVerifyEmail_2]=useState("");
     const [codVerifyEmail_3,setCodVerifyEmail_3]=useState("");
     const [codVerifyEmail_4,setCodVerifyEmail_4]=useState("");
-    const [remember,setRemember]=useState("");
+    const [remember,setRemember]=useState(0);
     const [register,setRegister]=useState(false);
+    const [, forceUpdate] = useState()
+
+
+    const dispatch = useDispatch();
 
 
     //HANDLE SELECT NEXT INPUT IN FORM FORGOTPASSWORD AND VERIFYEMAIL
@@ -29,6 +35,48 @@ export default function UserContext({children}) {
         handleNextInput(2)
     }, [codVerifyEmail_4])
     
+
+    //RESET STATE
+    const reset_state_contextApi=()=>{
+        setName("")
+        setEmail("")
+        setPassword("")
+        setPassword_confirmation("")
+        setCodVerifyEmail_1("")
+        setCodVerifyEmail_2("")
+        setCodVerifyEmail_3("")
+        setCodVerifyEmail_4("")
+        setRemember(0)
+        setRegister(false)
+    }
+
+
+    //CREATE VALIDATOR
+    const validator = useRef(new SimpleReactValidator({
+        messages: {
+            required: "پر کردن این فیلد الزامی میباشد",
+            min: "کمتر از 6 کاراکتر نباید باشد",
+            email: "ایمیل نوشته شده صحیح نمی باشد",
+            integer: "قیمت باید عدد باشد",
+        },
+        element: (message) => <span className='span_validator'>{message}</span>,
+    }))
+
+
+
+    //CHECK FORM VALIDATION
+    const check_validator=(functionAction)=>{
+        if (validator.current.allValid()) {
+            dispatch(functionAction);
+        }else{
+            validator.current.showMessages()
+            setTimeout(() => {
+                validator.current.hideMessages();
+                forceUpdate(2);
+            }, 4000);
+            forceUpdate(1);
+        }
+    }
     
 
   return (
@@ -53,7 +101,10 @@ export default function UserContext({children}) {
               remember,
               setRemember,
               register,
-              setRegister
+              setRegister,
+              validator,
+              check_validator,
+              reset_state_contextApi
           }
       }>
           {children}
