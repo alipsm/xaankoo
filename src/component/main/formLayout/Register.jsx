@@ -6,8 +6,11 @@ import { useSelector } from 'react-redux';
 
 export default function Register() {
 
-  const navigate = useNavigate();
+  
+  const { checkRegisterComplete } = useSelector(state => state)
 
+  const navigate = useNavigate();
+  
   const {
     name,
     setName,
@@ -15,12 +18,12 @@ export default function Register() {
     setEmail,
     setPassword,
     setPassword_confirmation,
-    validator,
-    check_validator
+    validator
   } = useContext(context)
 
-  const { checkRegisterComplete } = useSelector(state => state)
 
+
+  //REGISTER COMPLETE => NAVIGATE TO VERIFY FORM
   useEffect(() => {
     if (checkRegisterComplete == true) {
       navigate("verifyemail", { replace: false })
@@ -30,8 +33,6 @@ export default function Register() {
 
   return (
     <div id='register-form'>
-
-     
       <div className='input-validator-container col-3'>
          <div className=" input-effect">
         <input className="effect-22" name='name' placeholder=' ' type="text" onChange={e => setName(e.target.value)} />

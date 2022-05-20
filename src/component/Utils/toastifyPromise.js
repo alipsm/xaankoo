@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 
 export const showPromisToast = (fun) => {
-    // debugger
+
     var messageToastSuccess = "";
     var messageToastFiled = "";
 

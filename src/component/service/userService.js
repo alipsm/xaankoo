@@ -9,6 +9,7 @@ export const registerUser = user => {
 }
 
 export const loginUser = user => {
+    debugger
     const headerLoginUser = {
         "type": "noauth",
         "Accept": "application/json"
@@ -30,4 +31,5 @@ export const checkVerifyEmail = emailCod => {
         "Accept": "application/json"
     }
     return http.post(`${config.xaankooApi}/api/v1/auth/verifyEmail`,emailCod, headerCheckVerifyEmail);
+    // /api/v1/auth/verifyEmail
 }

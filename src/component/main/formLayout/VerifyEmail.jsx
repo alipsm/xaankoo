@@ -4,6 +4,8 @@ import { context } from '../../contextApi/context';
 import { checkVerifyEmailAction, sendCodEmailAction } from '../../Redux/Action';
 
 export default function VerifyEmail() {
+    
+    const dispatch = useDispatch();
 
     const {
         email,
@@ -17,7 +19,6 @@ export default function VerifyEmail() {
         setCodVerifyEmail_4,
     } = useContext(context)
 
-    const dispatch = useDispatch();
 
     return (
         <div id='verify-form'>

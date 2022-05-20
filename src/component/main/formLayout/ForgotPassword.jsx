@@ -1,12 +1,14 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import SimpleReactValidator from 'simple-react-validator'
 import { context } from '../../contextApi/context'
 import { changePasswordAction, checkVerifyEmailAction, sendCodEmailAction } from '../../Redux/Action'
-import { handleNextInput } from '../../Utils/focusNextInput'
 
 export default function ForgotPassword() {
+    
+    const dispatch = useDispatch();
+    
+    const unlockStep = useSelector(state => state.forgotPasswordStep)
 
     const {
         email,
@@ -19,22 +21,12 @@ export default function ForgotPassword() {
         setCodVerifyEmail_3,
         codVerifyEmail_4,
         setCodVerifyEmail_4,
-        password,
         setPassword,
-        password_confirmation,
         setPassword_confirmation,
         validator,
         check_validator,
         forceUpdate
     } = useContext(context)
-
-    const unlockStep = useSelector(state => state.forgotPasswordStep)
-
-    const dispatch = useDispatch();
-
-
-
-
 
 
     return (

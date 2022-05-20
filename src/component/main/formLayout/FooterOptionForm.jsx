@@ -5,6 +5,10 @@ import { useDispatch, } from 'react-redux'
 import { loginUserAction, registerUserAction, resetStateRedux } from '../../Redux/Action'
 
 export default function FooterOptionForm({ form_type }) {
+
+    const dispatch = useDispatch();
+
+    
     const {
         name,
         email,
@@ -12,7 +16,7 @@ export default function FooterOptionForm({ form_type }) {
         password_confirmation,
         check_validator
     } = useContext(context)
-    const dispatch = useDispatch();
+    
 
     return (
         <div className='footer_form'>
