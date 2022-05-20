@@ -8,7 +8,7 @@ export const showPromisToast = (fun) => {
     switch (fun.name) {
         case "login_user":
             messageToastSuccess = "ورود موفقیت آمیز"
-            messageToastFiled = "خطا در ورود کاربر"
+            messageToastFiled = "کاربر با مشخصات فوق یافت نشد"
             break;
 
         case "register_user":
@@ -24,7 +24,7 @@ export const showPromisToast = (fun) => {
 
         case "check_verify_email":
             messageToastSuccess = "اعتبار سنجی ایمیل انجام شد"
-            messageToastFiled = "خطا در اعتبار سنجی ایمیل"
+            messageToastFiled = "کد وارد شده صحیح نمی باشد"
             break;
 
 

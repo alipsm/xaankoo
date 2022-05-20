@@ -1,12 +1,14 @@
 import { registerUser, loginUser, verifyEmail, checkVerifyEmail } from "../../service/userService"
 import { showInputErrorToast, showPromisToast } from "../../Utils/toastifyPromise";
 
+
 // RESET STATE REDUX
 export const resetStateRedux = () => {
     return async (dispatch) => {
         await dispatch({ type: "RESET_STATE" })
     }
 }
+
 
 // REGISTER USER
 export const registerUserAction = (nameUser, email, password, password_confirmation) => {
@@ -25,15 +27,22 @@ export const registerUserAction = (nameUser, email, password, password_confirmat
             let register_user =async () => {
                 const { data, status } = await registerUser(formdata);
 
-                if (status==200) {
+                if (status==200&&data.status==true) {
                     state.email=email;
                     state.checkRegisterComplete=true;
                     let send_code_email = async () => {
                         const { data, status } = await verifyEmail(formdata);
+                        if (status==200&&data.status==true) {
+                            return Promise.resolve();
+                        }else{
+                            return Promise.reject();
+                        }
                     }
-
                     await dispatch({ type: "SEND_CODE_EMAIL", payload: state})
                     showPromisToast(send_code_email)
+                    return Promise.resolve()
+                }else{
+                    return Promise.reject()
                 }
             }
             showPromisToast(register_user)
@@ -42,6 +51,7 @@ export const registerUserAction = (nameUser, email, password, password_confirmat
         }
     }
 }
+
 
 //LOGIN USER
 export const loginUserAction = (email, password) => {
@@ -56,6 +66,11 @@ export const loginUserAction = (email, password) => {
 
                 let login_user = async () => {
                     const { data, status } = await loginUser(formdata);
+                    if (status==200&&data.status==true) {
+                        return Promise.resolve();
+                    }else{
+                        return Promise.reject();
+                    }
                 }
                 showPromisToast(login_user)
             }
@@ -69,8 +84,9 @@ export const loginUserAction = (email, password) => {
     }
 }
 
+
 //SEND EMAIL COD
-export const sendCodEmailAction = (email) => {
+export const sendCodEmailAction = (email,demoResolve) => {
     return async (dispatch, getState) => {
 
         if (email) {
@@ -80,9 +96,20 @@ export const sendCodEmailAction = (email) => {
             let send_code_email = async () => {
                 const { data, status } = await verifyEmail(formdata);
 
-                if (status == 200) {
+                if (status == 200&&data.status==true) {
                     state.forgotPasswordStep=1;
                     await dispatch({ type: "SEND_CODE_EMAIL", payload:state})
+                    return Promise.resolve()
+                }else{
+                    if(demoResolve&&demoResolve==true){
+                        state.forgotPasswordStep=1;
+                        await dispatch({ type: "SEND_CODE_EMAIL", payload:state})
+                        return Promise.resolve()
+
+                    }else{
+
+                        return Promise.reject();
+                    }
                 }
             }
             showPromisToast(send_code_email)
@@ -92,6 +119,7 @@ export const sendCodEmailAction = (email) => {
         }
     }
 }
+
 
 //CHECK EMAIL COD 
 export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2, codVerifyEmail_3, codVerifyEmail_4) => {
@@ -103,17 +131,18 @@ export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2
 
             const code = codVerifyEmail_1 + codVerifyEmail_2 + codVerifyEmail_3 + codVerifyEmail_4;
             let formdata = new FormData();
-            // formdata.append("code", "1111")
             formdata.append("code", code)
             formdata.append("email", email?email:state.email)
-            // formdata.append("email", "stooormix@gmail.com")
-            // debugger
             let check_verify_email = async () => {
                 const { data, status } = await checkVerifyEmail(formdata);
-                if (status == 200) {
+                debugger
+                if (status == 200&&data.status==true) {
                     state.forgotPasswordStep=2;
+                    await dispatch({ type: "VERIFY_EMAIL", payload: state})
+                    return Promise.resolve();
+                }else{
+                    return Promise.reject();
                 }
-                await dispatch({ type: "VERIFY_EMAIL", payload: state})
             }
             showPromisToast(check_verify_email)
         }
@@ -122,6 +151,7 @@ export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2
         }
     }
 }
+
 
 //CHANGE USER PASSWORD 
 export const changePasswordAction = () => {

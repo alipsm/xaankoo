@@ -43,7 +43,7 @@ export default function ForgotPassword() {
                 </div>
                 {validator.current.message('email', email, 'required|email')}
             </div>
-                <button className={`btn-style ${unlockStep > 0 ? "complete_btn_section" : ""}`} onClick={() => check_validator(sendCodEmailAction(email), "email")}>ارسال مجدد ایمیل</button>
+                <button className={`btn-style ${unlockStep > 0 ? "complete_btn_section" : ""}`} onClick={() => check_validator(sendCodEmailAction(email,true), "email")}>ارسال مجدد ایمیل</button>
             <div>
                 <div>
                     <span className={`${unlockStep > 0 ? "" : "disabled_span_style"}`}>کد فعال سازی</span>

@@ -15,7 +15,6 @@ function App() {
 
   //RESET STATE REDUX AND CONTEXT API WITH CHANGE BROWSER PATH
   useEffect(() => {
-    debugger
     if (location!="/register/verifyemail") {
       reset_state_contextApi();
       dispatch(resetStateRedux());
