@@ -30,5 +30,20 @@ export const checkVerifyEmail = emailCod => {
         "Accept": "application/json"
     }
     return http.post(`${config.xaankooApi}/api/v1/auth/verifyEmail`,emailCod, headerCheckVerifyEmail);
-    // /api/v1/auth/verifyEmail
+}
+
+export const verifyEmailChangePassword = cod => {
+    const headerCheckVerifyEmail = {
+        "type": "noauth",
+        "Accept": "application/json"
+    }
+    return http.post(`${config.xaankooApi}/api/v1/auth/forgot-password`,cod, headerCheckVerifyEmail);
+}
+
+export const changePassword = user => {
+    const headerCheckVerifyEmail = {
+        "type": "noauth",
+        "Accept": "application/json"
+    }
+    return http.post(`${config.xaankooApi}/api/v1/auth/change-password`,user, headerCheckVerifyEmail);
 }

@@ -1,4 +1,6 @@
-import { registerUser, loginUser, verifyEmail, checkVerifyEmail } from "../../service/userService"
+import browserslist from "browserslist";
+import { toast } from "react-toastify";
+import { registerUser, loginUser, verifyEmail, checkVerifyEmail, verifyEmailChangePassword } from "../../service/userService"
 import { showInputErrorToast, showPromisToast } from "../../Utils/toastifyPromise";
 
 
@@ -33,19 +35,20 @@ export const registerUserAction = (nameUser, email, password, password_confirmat
                     let send_code_email = async () => {
                         const { data, status } = await verifyEmail(formdata);
                         if (status==200&&data.status==true) {
+                            
                             return Promise.resolve();
                         }else{
                             return Promise.reject();
                         }
                     }
                     await dispatch({ type: "SEND_CODE_EMAIL", payload: state})
-                    showPromisToast(send_code_email)
+                    showPromisToast(send_code_email(),"sendCod")
                     return Promise.resolve()
                 }else{
                     return Promise.reject()
                 }
             }
-            showPromisToast(register_user)
+            showPromisToast(register_user(),"registerUser")
         } else {
             showInputErrorToast();
         }
@@ -57,29 +60,39 @@ export const registerUserAction = (nameUser, email, password, password_confirmat
 export const loginUserAction = (email, password) => {
     return async (dispatch, getState) => {
         // debugger
-        try {
-            if (email&& password) {
+        
+        if (email&& password) {
+                const toastPromise= toast.loading("درحال ارسال درخواست شما به سرور")
 
                 let formdata = new FormData();
                 formdata.append("email", email)
                 formdata.append("password", password)
 
-                let login_user = async () => {
-                    const { data, status } = await loginUser(formdata);
-                    if (status==200&&data.status==true) {
-                        return Promise.resolve();
-                    }else{
-                        return Promise.reject();
+                let toastMessage="";
+                    try {
+                        
+                        const { data, status } = await loginUser(formdata);
+                        if (status==200&&data.status==true) {
+                            // debugger
+                            localStorage.setItem("token",data.data.token);
+                            toast.update(toastPromise,{render: "با موفقیت وارد شدید", type: "success", isLoading: false,autoClose:3000 })
+                        }else{
+                            data.errors.forEach(element => {
+                                toastMessage += element;
+                            });
+                            toast.update(toastPromise,{render: toastMessage, type: "error", isLoading: false,autoClose:3000 })
+                        }
+                    } catch (error) {
+                        error.response.data.errors.forEach(element => {
+                            toastMessage += element;
+                        });
+                        toast.update(toastPromise,{render:toastMessage, type: "error", isLoading: false,autoClose:3000 })
                     }
-                }
-                showPromisToast(login_user)
             }
             else {
                 showInputErrorToast();
             }
-        } catch (error) {
-            showInputErrorToast();
-        }
+    
         await dispatch({ type: "LOGIN_USER", payload: { ...getState() } })
     }
 }
@@ -97,7 +110,7 @@ export const sendCodEmailAction = (email,demoResolve) => {
                 const { data, status } = await verifyEmail(formdata);
 
                 if (status == 200&&data.status==true) {
-                    state.forgotPasswordStep=1;
+                    // state.forgotPasswordStep=1;
                     await dispatch({ type: "SEND_CODE_EMAIL", payload:state})
                     return Promise.resolve()
                 }else{
@@ -112,7 +125,7 @@ export const sendCodEmailAction = (email,demoResolve) => {
                     }
                 }
             }
-            showPromisToast(send_code_email)
+            showPromisToast(send_code_email(),"sendCod")
         }
         else {
             showInputErrorToast();
@@ -138,13 +151,46 @@ export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2
                 debugger
                 if (status == 200&&data.status==true) {
                     state.forgotPasswordStep=2;
+                    state.checkVerifyRegister=true;
                     await dispatch({ type: "VERIFY_EMAIL", payload: state})
                     return Promise.resolve();
                 }else{
                     return Promise.reject();
                 }
             }
-            showPromisToast(check_verify_email)
+            showPromisToast(check_verify_email(),"checkVerifyEmail")
+        }
+        else {
+            showInputErrorToast();
+        }
+    }
+}
+
+
+
+
+//SEND EMAIL COD FOR FORGOT PASSWORD SECTION
+export const sendCodEmailForgotpasswordAction = (email) => {
+    return async (dispatch, getState) => {
+
+        if (email) {
+            let state={...getState()}
+            let formdata = new FormData();
+            formdata.append("email", email)
+            const { data, status } = await verifyEmailChangePassword(formdata);
+            let send_code_email_forgotPassword = async () => {
+                if (status == 200&&data.status==true) {
+                    state.forgotPasswordStep=1;
+                    await dispatch({ type: "SEND_CODE_EMAIL_FORGOTPASSWORD", payload:state})
+                    return Promise.resolve()
+                }else{
+                    return Promise.reject();
+                }
+            }
+            debugger
+            const dd=data.error[0]
+            showPromisToast(send_code_email_forgotPassword(),data.error[0])
+            // showPromisToast(send_code_email_forgotPassword(),"sendCod")
         }
         else {
             showInputErrorToast();
@@ -163,7 +209,7 @@ export const changePasswordAction = () => {
             return Promise.reject();
         }
 
-        showPromisToast(change_password)
+        showPromisToast(change_password(),"changePassword")
 
         alert("باعرض پوزش دسترسی به وبسرویس تغییر پسورد نداشتم و قرار شد تا این مرحله پیش برم");
         await dispatch({ type: "CHANGE_PASSWORD",payload:state })

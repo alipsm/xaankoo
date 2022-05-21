@@ -10,7 +10,7 @@
 			"event": [
 				{
 					"listen": "test",
-					"script": {
+					"script": { 
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);\r",
 							"pm.environment.set(\"token\", jsonData[\"data\"][\"token\"]);"

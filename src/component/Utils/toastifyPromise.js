@@ -1,50 +1,51 @@
 import { toast } from "react-toastify"
 
-export const showPromisToast = (fun) => {
+export const showPromisToast = (fun,message) => {
 
-    var messageToastSuccess = "";
-    var messageToastFiled = "";
+    // var messageToastSuccess = "c";
+    // var messageToastFiled = "f";
 
-    switch (fun.name) {
-        case "login_user":
-            messageToastSuccess = "ورود موفقیت آمیز"
-            messageToastFiled = "کاربر با مشخصات فوق یافت نشد"
-            break;
+    // switch (fun_type) {
+    //     case "loginUser":
+    //         messageToastSuccess = "ورود موفقیت آمیز"
+    //         messageToastFiled = "کاربر با مشخصات فوق یافت نشد"
+    //         break;
 
-        case "register_user":
-            messageToastSuccess = "ثبت نام موفقیت آمیز"
-            messageToastFiled = "خطا در ثبت نام کاربر"
-            break;
+    //     case "registerUser":
+    //         messageToastSuccess = "ثبت نام موفقیت آمیز"
+    //         messageToastFiled = "خطا در ثبت نام کاربر"
+    //         break;
 
-        case "send_code_email":
-            messageToastSuccess = "کد به حساب شما ارسال شد"
-            messageToastFiled = "خطا در ارسال کد به حساب شما"
-            break;
-
-
-        case "check_verify_email":
-            messageToastSuccess = "اعتبار سنجی ایمیل انجام شد"
-            messageToastFiled = "کد وارد شده صحیح نمی باشد"
-            break;
+    //     case "sendCod":
+    //         messageToastSuccess = "کد به حساب شما ارسال شد"
+    //         messageToastFiled = "حساب شما یافت نشد"
+    //         break;
 
 
-        case "change_password":
-            messageToastSuccess = "پسورد با موفقیت تغییر کرد"
-            messageToastFiled = "API برایه تغییر پسورد یافت نشد"
-            break;
+    //     case "checkVerifyEmail":
+    //         messageToastSuccess = "اعتبار سنجی ایمیل انجام شد"
+    //         messageToastFiled = "کد وارد شده صحیح نمی باشد"
+    //         break;
 
 
-        default:
-            break;
-    }
+    //     case "changePassword":
+    //         messageToastSuccess = "پسورد با موفقیت تغییر کرد"
+    //         messageToastFiled = "API برایه تغییر پسورد یافت نشد"
+    //         break;
+
+
+    //     default:
+    //         break;
+    // }
+    debugger
     toast.promise(
         fun
         ,
         {
             hideProgressBar: true,
             pending: 'درحال ارسال درخواست شما به سرور',
-            success: messageToastSuccess,
-            error: messageToastFiled
+            success:()=>"ss",
+            error: ()=>"ama"
         }
     )
 }
