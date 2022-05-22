@@ -1,6 +1,6 @@
 import browserslist from "browserslist";
 import { toast } from "react-toastify";
-import { registerUser, loginUser, verifyEmail, checkVerifyEmail, verifyEmailChangePassword } from "../../service/userService"
+import { registerUser, loginUser, verifyEmail, checkVerifyEmail, verifyEmailChangePassword, logout } from "../../service/userService"
 import { showInputErrorToast, showPromisToast } from "../../Utils/toastifyPromise";
 
 
@@ -18,7 +18,7 @@ export const registerUserAction = (nameUser, email, password, password_confirmat
 
         if (nameUser && email && password && password_confirmation) {
 
-            const toastPromiseRegister = toast.loading("درحال ارسال درخواست شما به سرور")
+            let toastPromiseRegister = toast.loading("درحال ارسال درخواست شما به سرور")
 
             let toastMessage = "";
             let state = { ...getState() }
@@ -35,7 +35,7 @@ export const registerUserAction = (nameUser, email, password, password_confirmat
 
                 if (status == 200 && data.status == true) {
                     toast.update(toastPromiseRegister, { render: "به خانواده بزرگ زانکو خوش آمدید", type: "success", isLoading: false, autoClose: 3000 })
-                    const toastPromiseSendCode = toast.loading("درحال ارسال درخواست شما به سرور")
+                    let toastPromiseSendCode = toast.loading("درحال ارسال درخواست شما به سرور")
                     state.email = email;
                     state.checkRegisterComplete = true;
                     // let send_code_email = async () => {
@@ -211,15 +211,16 @@ export const checkVerifyEmailAction = (email, codVerifyEmail_1, codVerifyEmail_2
 
 
 //SEND EMAIL COD FOR FORGOT PASSWORD SECTION
-export const sendCodEmailForgotpasswordAction = (email) => {
+export const sendCodEmailForgotPasswordAction = (email) => {
     return async (dispatch, getState) => {
 
         if (email) {
 
-            const toastPromise= toast.loading("درحال ارسال درخواست شما به سرور")
+            let toastPromise= toast.loading("درحال ارسال درخواست شما به سرور")
 
             let toastMessage="";
             try {
+                debugger
                 let state = { ...getState() }
                 let formdata = new FormData();
                 formdata.append("email", email)
@@ -227,7 +228,8 @@ export const sendCodEmailForgotpasswordAction = (email) => {
                 // let send_code_email_forgotPassword = async () => {
                 if (status == 200 && data.status == true) {
                     state.forgotPasswordStep = 1;
-                    toast.update(toastPromiseRegister,{render: "کد به ایمیل شما ارسال شد", type: "success", isLoading: false,autoClose:3000 })
+                    toast.update(toastPromise,{render: "کد به ایمیل شما ارسال شد", type: "success", isLoading: false,autoClose:3000 })
+                    await dispatch({ type: "SEND_CODE_EMAIL_FORGOTPASSWORD", payload: state })
                     // return Promise.resolve()
                 } else {
                     // return Promise.reject();
@@ -249,7 +251,6 @@ export const sendCodEmailForgotpasswordAction = (email) => {
             }
 
             // showPromisToast(send_code_email_forgotPassword(),"sendCod")
-            await dispatch({ type: "SEND_CODE_EMAIL_FORGOTPASSWORD", payload: state })
         }
         else {
             showInputErrorToast();
@@ -271,6 +272,37 @@ export const changePasswordAction = () => {
         showPromisToast(change_password(), "changePassword")
 
         alert("باعرض پوزش دسترسی به وبسرویس تغییر پسورد نداشتم و قرار شد تا این مرحله پیش برم");
+        await dispatch({ type: "CHANGE_PASSWORD", payload: state })
+    }
+}
+export const logoutAction = () => {
+    return async (dispatch, getState) => {
+        let toastPromise= toast.loading("درحال ارسال درخواست شما به سرور")
+
+        let toastMessage="";
+
+        let state = { ...getState() }
+
+        try {
+            const { data, status } = await logout();
+
+        if (status == 200 && data.status == true) {
+            toast.update(toastPromise,{render: "از حساب خود خارج شدید", type: "success", isLoading: false,autoClose:3000 })
+        }else{
+            data.errors.forEach(element => {
+                toastMessage += element;
+            });
+            toast.update(toastPromise,{render: toastMessage, type: "error", isLoading: false,autoClose:3000 })
+        }
+
+
+        } catch (error) {
+            error.response.data.errors.forEach(element => {
+                toastMessage += element ;
+            });
+            toast.update(toastPromise, { render: toastMessage, type: "error", isLoading: false, autoClose: 3000 })
+        }
+        
         await dispatch({ type: "CHANGE_PASSWORD", payload: state })
     }
 }
