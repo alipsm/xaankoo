@@ -479,6 +479,10 @@ padding: 20px;
 }
 
 
+#dashboard{
+  text-align: center;
+}
+
 /* BASIC RESPONSE FOR LAPTOP */
 @media screen and (max-width:1510px) {
   #forgot-password .col-3 {

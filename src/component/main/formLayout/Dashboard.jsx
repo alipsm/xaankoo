@@ -9,12 +9,15 @@ export default function Dashboard() {
     const dispatch=useDispatch();
     const navigate = useNavigate();
 
+    var information_user;
     useEffect(() => {
         const token=  localStorage.getItem("token")
+        const user=  localStorage.getItem("user")
         if (token) {
-        //    debugger
-           const tokenDecode=jwtDecode(token);
-           console.log(tokenDecode);
+           debugger
+          //  const tokenDecode=jwtDecode(token);
+          // information_user= token.user;
+          //  console.log(tokenDecode);
        } else {
         // navigate("/dashboard", { replace: true })
        }
@@ -23,7 +26,7 @@ export default function Dashboard() {
 
   return (
     <div id='dashboard'>
-        <h2>سلام {"name"}</h2>
+        <h2>سلام {}</h2>
         <br />
         <h4>آماده یک ماجراجویی بزرگ هستی؟</h4>
         <br />

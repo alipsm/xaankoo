@@ -1,4 +1,5 @@
 import browserslist from "browserslist";
+import { Navigate } from "react-router";
 import { toast } from "react-toastify";
 import { registerUser, loginUser, verifyEmail, checkVerifyEmail, verifyEmailChangePassword, logout } from "../../service/userService"
 import { showInputErrorToast, showPromisToast } from "../../Utils/toastifyPromise";
@@ -97,8 +98,11 @@ export const loginUserAction = (email, password) => {
 
                 const { data, status } = await loginUser(formdata);
                 if (status == 200 && data.status == true) {
-                    // debugger
-                    localStorage.setItem("token", data.data.token);
+                    debugger
+                    // Navigate("/dashboard");
+                    const json=JSON.parse(data.data.user)
+                    localStorage.setItem("token",data.data.token);
+                    localStorage.setItem("user", json);
                     toast.update(toastPromise, { render: "با موفقیت وارد شدید", type: "success", isLoading: false, autoClose: 3000 })
                 } else {
                     data.errors.forEach(element => {
@@ -287,6 +291,7 @@ export const logoutAction = () => {
             const { data, status } = await logout();
 
         if (status == 200 && data.status == true) {
+            localStorage.removeItem("token")
             toast.update(toastPromise,{render: "از حساب خود خارج شدید", type: "success", isLoading: false,autoClose:3000 })
         }else{
             data.errors.forEach(element => {

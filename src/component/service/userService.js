@@ -47,3 +47,7 @@ export const changePassword = user => {
     }
     return http.post(`${config.xaankooApi}/api/v1/auth/change-password`,user, headerCheckVerifyEmail);
 }
+
+export const logout = () => {
+    return http.post(`${config.xaankooApi}/api/v1/auth/logout`);
+}

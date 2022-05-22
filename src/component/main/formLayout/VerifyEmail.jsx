@@ -25,7 +25,7 @@ export default function VerifyEmail() {
     //VERIFY REGISTER COMPLETE => NAVIGATE TO LOGIN FORM
     useEffect(() => {
         if (checkVerifyRegister == true) {
-            navigate("/login", { replace: true })
+            navigate("/dashboard", { replace: true })
         }
     }, [checkVerifyRegister])
 
